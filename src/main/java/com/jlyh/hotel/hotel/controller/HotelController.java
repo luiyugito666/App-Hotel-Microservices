@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jlyh.hotel.hotel.config.HotelServiceConfiguration;
 import com.jlyh.hotel.hotel.model.Hotel;
+import com.jlyh.hotel.hotel.model.HotelRooms;
 import com.jlyh.hotel.hotel.model.PropertiesHotel;
 import com.jlyh.hotel.hotel.service.IHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,6 +27,13 @@ public class HotelController {
 
     public List<Hotel> getAllHotel(){
        return service.getAll();
+
+    }
+
+    @GetMapping("hotels/{hotelId}")
+
+    public HotelRooms getHotelById(@PathVariable Long hotelId){
+        return service.getHotelById(hotelId);
 
     }
 
