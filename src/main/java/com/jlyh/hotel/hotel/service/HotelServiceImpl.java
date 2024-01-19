@@ -55,4 +55,17 @@ public class HotelServiceImpl implements IHotelService{
 
 
     }
+
+    @Override
+    public HotelRooms getHotelByIdWithOutRooms(Long hotelId) {
+        HotelRooms response = new HotelRooms();
+        Optional<Hotel> hotel = serviceDao.findById(hotelId);
+
+        response.setHotelId(hotel.get().getHotelId());
+        response.setHotelName(hotel.get().getHotelName());
+        response.setHotelAddress(hotel.get().getHotelAddress());
+
+
+        return response;
+    }
 }

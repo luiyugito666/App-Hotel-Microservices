@@ -9,4 +9,5 @@ public interface IHotelService {
 
     List<Hotel> getAll();
     HotelRooms getHotelById(Long hotelId);
+    HotelRooms getHotelByIdWithOutRooms(Long hotelId);
 }
