@@ -9,6 +9,7 @@ import com.jlyh.hotel.hotel.model.HotelRooms;
 import com.jlyh.hotel.hotel.model.PropertiesHotel;
 import com.jlyh.hotel.hotel.service.IHotelService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,8 @@ public class HotelController {
     }
 
     @GetMapping("hotels/{hotelId}")
-    @CircuitBreaker(name="getHotelByIdSupportCB", fallbackMethod = "getHotelByIdAlternative")
+    //@CircuitBreaker(name="getHotelByIdSupportCB", fallbackMethod = "getHotelByIdAlternative")
+    @Retry(name="getHotelByIdSupportRetry" , fallbackMethod = "getHotelByIdAlternative")
     public HotelRooms getHotelById(@PathVariable Long hotelId){
         return service.getHotelById(hotelId);
 
